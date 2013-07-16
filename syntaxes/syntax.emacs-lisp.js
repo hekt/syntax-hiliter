@@ -18,7 +18,7 @@
     'apply', 'nil', 't'
   ];
   var kwsReStr = "(^|['\\(\\s\\t])({0})([\\)\\s\\t]|$)";
-  syntax.addKeywords(keywords, 'keyword', kwsReSTr);
+  syntax.addKeywords(keywords, 'keyword', kwsReStr);
   syntax.addKeywords(['\''], 'keyword', "(^|['\\(\\s\\t])({0})([^\\s\\t]|$)");
 
   SyntaxHiliter.add('emacs-lisp', syntax);
