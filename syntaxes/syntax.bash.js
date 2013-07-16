@@ -7,9 +7,9 @@
   syntax.add(lib.singleLine.hash, 'comment');
 
   var keywords = [
-    '!', 'case', 'do', 'done', 'elif', 'else', 'esac', 'fi', 'for',
-    'function', 'if', 'in', 'select', 'then', 'until', 'while', '{', '}',
-    'time', '[[', ']]', '$', '%'
+    '!', 'case', 'do', 'done', 'elif', 'else', 'esac', 'fi', 'for', 'function',
+    'if', 'in', 'select', 'then', 'until', 'while', '{', '}', 'time', '[[',
+    ']]', '$', '%'
   ];
   syntax.addKeywords(keywords, 'keyword');
   

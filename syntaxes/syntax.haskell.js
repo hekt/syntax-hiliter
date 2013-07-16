@@ -8,10 +8,10 @@
   syntax.add(lib.string.doubleQuote, 'string');
 
   var keywords = [
-    'class', 'data', 'default', 'deriving', 'do', 'else', 'if', 'import',
-    'in', 'infix', 'infixl', 'infixr', 'instance', 'let', 'module', 'newtype',
-    'of', 'then', 'type', 'where',
-    '_', ':', '::', '=', '\\', '|', '<', '-', '->', '@', '~', '=>'
+    'class', 'data', 'default', 'deriving', 'do', 'else', 'if', 'import', 'in',
+    'infix', 'infixl', 'infixr', 'instance', 'let', 'module', 'newtype', 'of',
+    'then', 'type', 'where', '_', ':', '::', '=', '\\', '|', '<', '-', '->',
+    '@', '~', '=>'
   ];
   syntax.addKeywords(keywords, 'keyword');
 

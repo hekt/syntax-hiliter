@@ -20,10 +20,10 @@
     'menu', 'meta', 'meter', 'nav', 'nobr', 'noframes', 'noscript', 'object',
     'ol', 'optgroup', 'option', 'output', 'p', 'param', 'plaintext', 'pre',
     'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'script', 'section',
-    'select', 'small', 'source', 'spacer', 'span', 'strike', 'strong',
-    'style', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'textarea',
-    'tfoot', 'th', 'thead', 'time', 'title', 'tr', 'track', 'tt', 'u', 'ul',
-    'var', 'video', 'wbr', 'xmp'
+    'select', 'small', 'source', 'spacer', 'span', 'strike', 'strong', 'style',
+    'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'textarea', 'tfoot', 'th',
+    'thead', 'time', 'title', 'tr', 'track', 'tt', 'u', 'ul', 'var', 'video',
+    'wbr', 'xmp'
   ];
   var kwsReStr = '(</?|&lt;/?)({0})($|&gt;|[/>\\s\\t])';
   syntax.addKeywords(keywords, 'keyword', kwsReStr);
