@@ -65,6 +65,11 @@ var SyntaxHiliter = (function() {
   }
 
 
+  function getSyntax(lang) {
+    return syntaxes[lang];
+  }
+
+
   function addTags(str, repList) {
     var newStr = '';
     var lastIndex = 0;
@@ -109,6 +114,7 @@ var SyntaxHiliter = (function() {
   
   var Syntax = function() {
     this._list = [];
+    this._includes = [];
     this.wrapperTagName = 'code';
   };
   
@@ -132,6 +138,12 @@ var SyntaxHiliter = (function() {
         this._list.push({re: re, repTo: repTo});
       }
     },
+    getList: function() {
+      return this._list;
+    },
+    include: function(lang) {
+      this._includes.push(lang);
+    },
     build: function(str) {
       function build(re, repTo) {
         var l, i, n;
@@ -147,6 +159,16 @@ var SyntaxHiliter = (function() {
         }
 
         return result;
+      }
+
+      function includeAll(includes) {
+        var l = [];
+        var s;
+        for (var i = 0; i < includes.length; i++) {
+          s = SyntaxHiliter.getSyntax(includes[i]);
+          if (s) l = l.concat(s.getList());
+        }
+        return l;
       }
 
       function reduceOverlaps(xs) {
@@ -165,11 +187,14 @@ var SyntaxHiliter = (function() {
       function sortFunc(x, y) {
         return x.index > y.index ? 1 : -1;
       }
-      
+
+
+      var ls = this._list.concat(includeAll(this._includes));
+
       var result = [];
       
-      for (var i = 0; i < this._list.length; i++) {
-        var d = this._list[i];
+      for (var i = 0; i < ls.length; i++) {
+        var d = ls[i];
         result = result.concat(build(d.re, d.repTo));
       }
 
@@ -186,7 +211,7 @@ var SyntaxHiliter = (function() {
     add: add,
     all: all,
     regExpLib: regExpLib,
-    syntaxes: syntaxes
+    getSyntax: getSyntax
   };
 })();
 
