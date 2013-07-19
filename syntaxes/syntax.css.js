@@ -76,13 +76,13 @@
     'appearance', 'box-sizing', 'icon', 'nav-down', 'nav-index', 'nav-left',
     'nav-right', 'nav-up', 'outline-offset', 'resize'
   ];
-  var propReStr = '(^|[{;\\s\\t\\n\\r])({0})($|[\\s\\t]*:)';
+  var propReStr = '(^|[{;\\s\\t\\n\\r])({0})(?=$|[\\s\\t]*:)';
   syntax.addKeywords(properties, 'keyword', propReStr);
 
   var vendorPrefixes = [
     'webkit', 'moz', 'o', 'ms'
   ];
-  var vpReStr = '(^|[{;\\s\\t])(-{0}-[a-zA-Z-]+)([\\s\\t]*:)';
+  var vpReStr = '(^|[{;\\s\\t])(-{0}-[a-zA-Z-]+)(?=[\\s\\t]*:)';
   syntax.addKeywords(vendorPrefixes, 'keyword', vpReStr);
   
 

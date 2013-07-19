@@ -17,9 +17,10 @@
     '*', '/', '%', 'defun', 'lambda', 'mapcar', 'mapconcat', 'funcall',
     'apply', 'nil', 't'
   ];
-  var kwsReStr = "(^|['\\(\\s\\t])({0})([\\)\\s\\t]|$)";
+  var kwsReStr = "(^|['\\(\\s\\t])({0})(?=[\\)\\s\\t]|$)";
   syntax.addKeywords(keywords, 'keyword', kwsReStr);
-  syntax.addKeywords(['\''], 'keyword', "(^|['\\(\\s\\t])({0})([^\\s\\t]|$)");
+  syntax.addKeywords(['\''], 'keyword',
+                     "(^|['\\(\\s\\t])({0})(?=[^\\s\\t]|$)");
 
   SyntaxHiliter.add('emacs-lisp', syntax);
   SyntaxHiliter.add('elisp', syntax);

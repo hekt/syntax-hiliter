@@ -25,7 +25,7 @@
     'thead', 'time', 'title', 'tr', 'track', 'tt', 'u', 'ul', 'var', 'video',
     'wbr', 'xmp'
   ];
-  var kwsReStr = '(</?|&lt;/?)({0})($|&gt;|[/>\\s\\t])';
+  var kwsReStr = '(</?|&lt;/?)({0})(?=$|&gt;|[/>\\s\\t])';
   syntax.addKeywords(keywords, 'keyword', kwsReStr);
   
 

@@ -115,26 +115,27 @@ var SyntaxHiliter = (function() {
   var Syntax = function() {
     this._list = [];
     this._includes = [];
-    this.wrapperTagName = 'code';
+    this._wrapperTagName = 'code';
   };
   
   Syntax.prototype = {
     add: function(re, className) {
       var repTo = format('<{0} class="{1}">$0</{0}>',
-                         [this.wrapperTagName, className]);
+                         [this._wraperTagName, className]);
       this._list.push({re: re, repTo: repTo});
     },
     addKeywords: function(wds, className, opt_kwReStr) {
       wds.sort(function(a, b) {
         return a.length> b.length ? 1 : -1;
       });
-      var kwReStr = opt_kwReStr || '(^|[^a-zA-Z-_])({0})($|[^a-zA-Z-_])';
+      var kwReStr = opt_kwReStr ||
+            '(^|[^a-zA-Z-_\'"])({0})(?=[^a-zA-Z-_\'"]|$)';
       var result = [];
       wds = wds.map(reQuote);
       for (var i = 0; i < wds.length; i++) {
         var re = new RegExp(format(kwReStr, [wds[i]]), 'gm');
-        var repTo = format('$1<{0} class="{1}">$2</{0}>$3',
-                           [this.wrapperTagName, className]);
+        var repTo = format('$1<{0} class="{1}">$2</{0}>',
+                           [this._wraperTagName, className]);
         this._list.push({re: re, repTo: repTo});
       }
     },
@@ -211,7 +212,7 @@ var SyntaxHiliter = (function() {
     add: add,
     all: all,
     regExpLib: regExpLib,
-    getSyntax: getSyntax
+    getSyntax: getSyntax,
   };
 })();
 
