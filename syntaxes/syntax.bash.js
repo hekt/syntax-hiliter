@@ -5,7 +5,7 @@
   syntax.add(lib.string.doubleQuote, 'string');
   syntax.add(lib.string.singleQuote, 'string');
   syntax.add(lib.singleLine.hash, 'comment');
-  syntax.add(/(^|\s)--?[^\s]*/gm, 'keyword');
+  syntax.add(/ --?[^\s]*/gm, 'comment');
 
   var keywords = [
     '!', 'case', 'do', 'done', 'elif', 'else', 'esac', 'fi', 'for', 'function',
