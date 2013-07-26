@@ -121,7 +121,7 @@ var SyntaxHiliter = (function() {
   Syntax.prototype = {
     add: function(re, className) {
       var repTo = format('<{0} class="{1}">$0</{0}>',
-                         [this._wraperTagName, className]);
+                         [this._wrapperTagName, className]);
       this._list.push({re: re, repTo: repTo});
     },
     addKeywords: function(wds, className, opt_kwReStr) {
@@ -135,7 +135,7 @@ var SyntaxHiliter = (function() {
       for (var i = 0; i < wds.length; i++) {
         var re = new RegExp(format(kwReStr, [wds[i]]), 'gm');
         var repTo = format('$1<{0} class="{1}">$2</{0}>',
-                           [this._wraperTagName, className]);
+                           [this._wrapperTagName, className]);
         this._list.push({re: re, repTo: repTo});
       }
     },
@@ -212,7 +212,6 @@ var SyntaxHiliter = (function() {
     add: add,
     all: all,
     regExpLib: regExpLib,
-    getSyntax: getSyntax,
+    getSyntax: getSyntax
   };
 })();
-
