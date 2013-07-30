@@ -3,16 +3,16 @@
 ## Usage
 
 ```html
-&lt;pre class="syntaxhiliter" data-code-language="javascript"&gt;
+<pre class="syntaxhiliter" data-code-language="javascript">
   function hello() {
     return "hello world";
   }
   console.log(hello()); // hello world
-&lt;/pre&gt;
+</pre>
 
-&lt;script src="hiliter.js"&gt;&lt;/script&gt;
-&lt;script src="syntaxes/lang.js"&gt;&lt;/script&gt;
-&lt;script&gt;
+<script src="hiliter.js"></script>
+<script src="syntaxes/lang.js"></script>
+<script>
   SyntaxHiliter.All();
-&lt;/script&gt;
+</script>
 ```
