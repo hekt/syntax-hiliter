@@ -23,7 +23,7 @@
     'select', 'small', 'source', 'spacer', 'span', 'strike', 'strong', 'style',
     'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'textarea', 'tfoot', 'th',
     'thead', 'time', 'title', 'tr', 'track', 'tt', 'u', 'ul', 'var', 'video',
-    'wbr', 'xmp'
+    'wbr', 'xmp', 'template'
   ];
   var kwsReStr = '(</?|&lt;/?)({0})(?=$|&gt;|[/>\\s\\t])';
   syntax.addKeywords(keywords, 'keyword', kwsReStr);
