@@ -52,17 +52,34 @@ var SyntaxHiliter = (function() {
     return false;
   }
 
-  function getCodeLang(elem) {
+  function getKeys(obj) {
+    var keys = [];
+    for (var k in obj) {
+      keys.push(k);
+    }
+    return keys;
+  }
+
+  function getCodeLang(elem, opt_languages) {
+    var langs = opt_languages || getKeys(syntaxes);
+
     if (elem.getAttribute('data-code-language'))
       return elem.getAttribute('data-code-language');
-    
-    for (var k in syntaxes) {
-      if (hasClass(elem, k)) {
-        return k;
-      }
+
+    for (var i = 0, len = langs.length; i < len; i++) {
+      if (hasClass(elem, langs[i])) return langs[i];
     }
-    
+
     return undefined;
+  }
+  
+  function getText(elem) {
+    var innerElem = elem.getElementsByTagName("code")[0];
+    if (innerElem) {
+      return innerElem.innerHTML;
+    } else {
+      return elem.innerHTML;
+    }
   }
 
 
@@ -85,6 +102,35 @@ var SyntaxHiliter = (function() {
     newStr += str.substring(lastIndex);
 
     return newStr;
+  }
+
+
+  function lazyLoad(url, callback, thisObj, args) {
+    var elem = document.createElement("script");
+    elem.src = url;
+    elem.onload = function() {
+      callback.apply(thisObj, args);
+    };
+    document.head.appendChild(elem);
+  }
+
+
+  function lazyAll(obj) {
+    var elems = document.getElementsByTagName("pre");
+    for (var i = 0, len = elems.length; i < len; i++) {
+      var elem = elems[i];
+      var lang = getCodeLang(elem, getKeys(obj));
+      if (!lang) return;
+      var s = getText(elem);
+
+      if (syntaxes[lang]) {
+        elem.innerHTML = addTags(s, syntaxes[lang].build(s));
+      } else {
+        lazyLoad(obj[lang], function(elem, lang, s) {
+          elem.innerHTML = addTags(s, syntaxes[lang].build(s));
+        }, this, [elem, lang, s]);
+      }
+    }
   }
 
 
@@ -209,6 +255,7 @@ var SyntaxHiliter = (function() {
     Syntax: Syntax,
     add: add,
     all: all,
+    lazyAll: lazyAll,
     regExpLib: regExpLib,
     getSyntax: getSyntax
   };
