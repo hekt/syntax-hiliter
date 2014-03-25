@@ -105,32 +105,33 @@ var SyntaxHiliter = (function() {
   }
 
 
-  function lazyLoad(url, callback, thisObj, args) {
-    var elem = document.createElement("script");
-    elem.src = url;
-    elem.onload = function() {
-      callback.apply(thisObj, args);
-    };
-    document.head.appendChild(elem);
-  }
-
-
   function lazyAll(obj) {
-    var elems = document.getElementsByTagName("pre");
-    for (var i = 0, len = elems.length; i < len; i++) {
-      var elem = elems[i];
+    var loading = {};
+    var elems = [].slice.call(document.getElementsByTagName("pre"));
+    elems.forEach(function(elem) {
       var lang = getCodeLang(elem, getKeys(obj));
-      if (!lang) return;
+      var url = obj[lang];
+      if (!lang || !url) return;
       var s = getText(elem);
+      var loadingScript;
 
       if (syntaxes[lang]) {
         elem.innerHTML = addTags(s, syntaxes[lang].build(s));
-      } else {
-        lazyLoad(obj[lang], function(elem, lang, s) {
+      } else if (url in loading) {
+        loading[url].addEventListener("load", function() {
           elem.innerHTML = addTags(s, syntaxes[lang].build(s));
-        }, this, [elem, lang, s]);
+        });
+      } else {
+        loadingScript = document.createElement("script");
+        loadingScript.addEventListener("load", function(event) {
+          elem.innerHTML = addTags(s, syntaxes[lang].build(s));
+          delete loading[url];
+        });
+        loadingScript.src = url;
+        loading[url] = loadingScript;
+        document.head.appendChild(loadingScript);
       }
-    }
+    });
   }
 
 
