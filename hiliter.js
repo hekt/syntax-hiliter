@@ -28,6 +28,10 @@ var SyntaxHiliter = (function() {
   };
 
   
+  function strip(s) {
+    return s.replace(/^\s*|\s*$/g, "");
+  }
+  
   function format(s, args) {
     return s.replace(/{([0-9]+)}/g, function() {
       return args[parseInt(arguments[1])];
@@ -105,12 +109,24 @@ var SyntaxHiliter = (function() {
   }
 
 
-  function lazyAll(obj) {
+  function splitLangs(langs) {
+    var result = {};
+    for (var k in langs) {
+      k.split(",").forEach(function(lang) {
+        result[strip(lang)] = langs[k];
+      });
+    }
+    return result;
+  }
+
+
+  function lazyAll(ls) {
     var loading = {};
+    var langs = splitLangs(ls);
     var elems = [].slice.call(document.getElementsByTagName("pre"));
     elems.forEach(function(elem) {
-      var lang = getCodeLang(elem, getKeys(obj));
-      var url = obj[lang];
+      var lang = getCodeLang(elem, getKeys(langs));
+      var url = langs[lang];
       if (!lang || !url) return;
       var s = getText(elem);
       var loadingScript;
@@ -123,7 +139,7 @@ var SyntaxHiliter = (function() {
         });
       } else {
         loadingScript = document.createElement("script");
-        loadingScript.addEventListener("load", function(event) {
+        loadingScript.addEventListener("load", function() {
           elem.innerHTML = addTags(s, syntaxes[lang].build(s));
           delete loading[url];
         });
