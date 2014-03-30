@@ -45,7 +45,7 @@ var SyntaxHiliter = (function() {
   }
 
   function reQuote(s) {
-    return s.replace(/[\[\]\*\+\.\\\^\$\?\(\)]/gm, '\\$&');
+    return s.replace(/[\[\]\*\+\.\\\^\$\?\(\)\|\&]/gm, '\\$&');
   }
 
   function hasClass(elem, className) {
